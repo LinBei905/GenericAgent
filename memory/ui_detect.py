@@ -27,7 +27,10 @@ DEFAULT_MODEL = str(Path(__file__).resolve().parent.parent / 'temp' / 'weights' 
 
 try:
     from rapidocr_onnxruntime import RapidOCR
-    _ocr = RapidOCR(det_use_cuda=True, rec_use_cuda=True, cls_use_cuda=True)
+    try:
+        _ocr = RapidOCR(use_cuda=True)
+    except Exception:
+        _ocr = RapidOCR()
 except ImportError: _ocr = None
 
 _YOLO = None
